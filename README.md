@@ -108,7 +108,7 @@ describe("your_program", () => {
 
 `RUST_BACKTRACE=1 RUST_LOG=info path/to/enhanced/anchor/target/debug/anchor coverage`
 
-Supported environment variables that Anchor will interpret if user is willing to specify the path to specific tools used for code coverage generation:
+Supported environment variables that anchor-cli will interpret if user is willing to specify the path to specific tools used for code coverage generation:
 
 ```bash
 LLVM_COV=llvm-cov-19 # default: llvm-cov
