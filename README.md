@@ -2,6 +2,22 @@
 
 This guide explains how to set up code coverage analysis for your Anchor program. 📊
 
+## Prerequisites 📋
+
+Install llvm (preferably version 19+)
+
+Ubuntu
+
+```bash
+sudo apt install llvm
+```
+
+MacOS
+
+```bash
+brew install llvm
+```
+
 ## Setup Steps 🛠️
 
 ### 1. Add the solana-coverage crate to your program: 📦
@@ -91,6 +107,14 @@ describe("your_program", () => {
 ## Generate test coverage report: 📈
 
 `RUST_BACKTRACE=1 RUST_LOG=info path/to/enhanced/anchor/target/debug/anchor coverage`
+
+Supported environment variables that Anchor will interpret if user is willing to specify the path to specific tools used for code coverage generation:
+
+```bash
+LLVM_COV=llvm-cov-19 # default: llvm-cov
+LLVM_PROFDATA=llvm-profdata-19 # default: llvm-profdata
+HTML_VIEWER=/bin/true # default: open
+```
 
 ## Example
 
