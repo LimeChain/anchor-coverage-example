@@ -95,4 +95,4 @@ describe("your_program", () => {
 ## Example
 
 The current repo showcases a simple vault program with code coverage enabled.<br/>
-To test it create the symbolic link to the enhanced liteSVM and run it with the enhanced Anchor CLI.
+To test it create the symbolic link to the enhanced liteSVM and generate the coverage with the enhanced Anchor CLI.
