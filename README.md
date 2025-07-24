@@ -119,4 +119,5 @@ HTML_VIEWER=/bin/true # default: open
 ## Example
 
 The current repo showcases a simple vault program with code coverage enabled.<br/>
-To test it create the symbolic link to the enhanced liteSVM and generate the coverage with the enhanced Anchor CLI.
+To test it create the symbolic link to the enhanced liteSVM ([step 5](#5-build-an-enhanced-version-of-litesvm-that-supports-code-coverage)) and generate the coverage with the enhanced Anchor CLI ([step 4](#4-build-an-enhanced-version-of-anchor-cli-that-supports-code-coverage-for-anchor-programs) and [Coverage section](#generate-test-coverage-report-📈)).
+Also be sure to have everything from the [Prerequisites](#prerequisites-📋) section installed.
