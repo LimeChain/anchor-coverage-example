@@ -2,7 +2,7 @@
 
 This guide explains how to set up code coverage analysis for your Anchor program. 📊
 
-## Prerequisites 📋
+## Prerequisites
 
 Install llvm (preferably version 19+)
 
@@ -104,7 +104,7 @@ describe("your_program", () => {
 });
 ```
 
-## Generate test coverage report: 📈
+## Generate test coverage report:
 
 `RUST_BACKTRACE=1 RUST_LOG=info path/to/enhanced/anchor/target/debug/anchor coverage`
 
@@ -119,5 +119,5 @@ HTML_VIEWER=/bin/true # default: open
 ## Example
 
 The current repo showcases a simple vault program with code coverage enabled.<br/>
-To test it create the symbolic link to the enhanced liteSVM ([step 5](#5-build-an-enhanced-version-of-litesvm-that-supports-code-coverage)) and generate the coverage with the enhanced Anchor CLI ([step 4](#4-build-an-enhanced-version-of-anchor-cli-that-supports-code-coverage-for-anchor-programs) and [Coverage section](#generate-test-coverage-report-📈)).
-Also be sure to have everything from the [Prerequisites](#prerequisites-📋) section installed.
+To test it create the symbolic link to the enhanced liteSVM ([step 5](#5-build-an-enhanced-version-of-litesvm-that-supports-code-coverage)) and generate the coverage with the enhanced Anchor CLI ([step 4](#4-build-an-enhanced-version-of-anchor-cli-that-supports-code-coverage-for-anchor-programs) and [Coverage section](#generate-test-coverage-report)).
+Also be sure to have everything from the [Prerequisites](#prerequisites) section installed.
