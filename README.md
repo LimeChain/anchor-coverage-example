@@ -57,16 +57,18 @@ cd anchor && cargo build
 
 ### 5. Build an enhanced version of LiteSVM that supports code coverage:
 
+Don't clone litesvm inside the anchor-coverage-example clone directory. Please clone it outside of it as this may break tests.
+
 ```bash
 git clone https://github.com/LimeChain/litesvm
 cd litesvm/crates/node-litesvm && yarn && yarn build
 ```
 
 Finally in order for the Typescript tests to use the enhanced version of LiteSVM we've just built,
-create a symbolic link to it at the root directory of the anchor workspace:
+create a symbolic link to it at the root directory of the anchor workspace. Be sure to use full path:
 
 ```bash
-ln -s path/to/enhanced/litesvm/crates/node-litesvm/litesvm local-litesvm
+ln -s /path/to/enhanced/litesvm/crates/node-litesvm/litesvm local-litesvm
 ```
 
 ## Getting started 🚀
