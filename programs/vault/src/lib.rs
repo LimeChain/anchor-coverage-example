@@ -7,15 +7,6 @@ mod constants;
 
 declare_id!("Ct4gVR9ggiLraQKcZeNs2fkbtDtCSxowC9KjCDcnSDyC");
 
-#[cfg(not(target_os = "solana"))]
-mod coverage {
-    use super::*;
-    use anchor_lang::solana_program::program_stubs::{set_syscall_stubs, SyscallStubs};
-    use anchor_lang::solana_program::{entrypoint::ProgramResult, instruction::Instruction};
-    // call coverage macro
-    solana_coverage::anchor_coverage!();
-}
-
 #[program]
 pub mod vault {
 

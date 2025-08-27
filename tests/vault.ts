@@ -28,9 +28,6 @@ describe("vault", () => {
     programId = program.programId;
 
     svm.addProgramFromFile(programId, "target/deploy/vault.so");
-
-    // Add coverage generation
-    svm.withCoverage([["vault", programId.toBuffer()]], [], payer.secretKey);
   });
 
   it("test_init_vault", async () => {
