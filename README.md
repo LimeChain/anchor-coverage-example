@@ -51,7 +51,7 @@ ln -s /path/to/enhanced/litesvm/crates/node-litesvm/litesvm local-litesvm
 
 ## Generate test coverage report:
 
-`RUST_BACKTRACE=1 path/to/enhanced/anchor-coverage-dwarf/target/debug/anchor-coverage test`
+`RUST_BACKTRACE=1 path/to/enhanced/anchor-coverage-dwarf/target/debug/anchor-coverage`
 
 `genhtml --output-directory coverage sbf_trace_dir/*.lcov && open coverage/index.html`
 
