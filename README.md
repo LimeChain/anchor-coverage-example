@@ -22,7 +22,7 @@ MacOS
 brew install llvm lcov
 ```
 
-Currently this example is tested to work on `Ubuntu 22.04.5` with `Solana 2.1.20`. Mind also that it's `LiteSVM 0.6.1` that's used under the hood.
+Currently this example is tested to work on `Ubuntu 22.04.5` with Solana's platform-tools v1.51 [see discussion here](https://github.com/anza-xyz/agave/discussions/7709). Mind also that it's `LiteSVM 0.6.1` that's used under the hood.
 
 ## Setup Steps
 
@@ -51,7 +51,7 @@ ln -s /path/to/enhanced/litesvm/crates/node-litesvm/litesvm local-litesvm
 
 ## Generate test coverage report:
 
-`RUST_BACKTRACE=1 path/to/enhanced/anchor-coverage-dwarf/target/debug/anchor-coverage`
+`cargo-build-sbf --tools-version v1.51 --debug [--arch v0] ; RUST_BACKTRACE=1 path/to/enhanced/anchor-coverage-dwarf/target/debug/anchor-coverage`
 
 `genhtml --output-directory coverage sbf_trace_dir/*.lcov && open coverage/index.html`
 
