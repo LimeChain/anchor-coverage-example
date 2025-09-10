@@ -51,7 +51,17 @@ ln -s /path/to/enhanced/litesvm/crates/node-litesvm/litesvm local-litesvm
 
 ## Generate test coverage report:
 
-`cargo-build-sbf --tools-version v1.51 --debug [--arch v0] ; RUST_BACKTRACE=1 path/to/enhanced/anchor-coverage-dwarf/target/debug/anchor-coverage`
+Get coverage _without_ optimizations by setting `opt-level=0` and `lto="off"` in `Cargo.toml`.
+This makes the program very big due to the lack of optimizations. The stack frame size of 4k isn't enough but Solana has made a fix.
+If SBPF version 1 is used dynamic stack frames are used. This allows for more accurate results.
+Due to several bugfixes it's desirable that platform-tools v1.51 is used:
+
+`RUST_BACKTRACE=1 SBPF_VERSION=v1 TOOLS_VERSION=v1.51 path/to/enhanced/anchor-coverage-dwarf/target/debug/anchor-coverage`
+
+Of course both of the environment variables can be omitted. Thus the SBPF version defaults to `v0` and platform-tools' version is the default one from CLI.
+With optimizations user may observe pretty inaccurate results.
+
+Then visualize:
 
 `genhtml --output-directory coverage sbf_trace_dir/*.lcov && open coverage/index.html`
 
