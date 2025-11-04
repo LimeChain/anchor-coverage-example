@@ -35,7 +35,7 @@ git clone -b litesvm_branching https://github.com/LimeChain/anchor-coverage-dwar
 cd anchor-coverage-dwarf && cargo build
 ```
 
-### 2. Build an enhanced version of LiteSVM 0.6.1 that supports code coverage:
+### 2. Build an enhanced version of LiteSVM 0.7.1 that supports code coverage:
 
 Don't clone litesvm inside the anchor-coverage-example clone directory. Please clone it outside of it as this may break tests.
 
