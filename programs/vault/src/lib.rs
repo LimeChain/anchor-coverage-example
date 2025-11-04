@@ -2,6 +2,7 @@
 #![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 
+use anchor_lang::solana_program::entrypoint::ProgramResult;
 use anchor_lang::system_program::{create_account, transfer, CreateAccount, Transfer};
 mod constants;
 
@@ -58,6 +59,16 @@ pub mod vault {
     }
 
     pub fn withdraw(ctx: Context<Withdraw>, amount: u64) -> Result<()> {
+        let _k = test_chained();
+        let _c = test_chained2();
+        let _a = test_question_mark(1);
+        let _b = test_question_mark(2);
+        test_conditional(1);
+        test_conditional(2);
+        if let Ok(v) = test_chained_errors() {
+            msg!("vec: {:?}", v);
+        }
+
         // withdrawals not available  after January first 2026 (1767218400)
         let current_timestamp = Clock::get()?.unix_timestamp;
 
@@ -69,6 +80,7 @@ pub mod vault {
         let rent = Rent::get()?;
         let rent_exempt_amount = rent.minimum_balance(0);
 
+        // msg!("vault.lamports: {}, rent_exempt_amount: {} + amount: {}", vault.lamports(), rent_exempt_amount, amount);
         if vault.lamports() < rent_exempt_amount + amount {
             return Err(VaultErrors::InsufficientVaultFunds.into());
         }
@@ -134,4 +146,68 @@ pub enum VaultErrors {
     WithdrawalNotAvailable,
     #[msg("Withdrawal amount is greater than the available balance")]
     InsufficientVaultFunds,
+}
+
+// #[inline(never)]
+fn test_question_mark(a: i64) -> ProgramResult {
+    let _s = "12345";
+    test_question_mark_inner(a)?;
+    Ok(())
+}
+
+// #[inline(never)]
+fn test_question_mark_inner(a: i64) -> ProgramResult {
+    if a == 1 {
+        Err(ProgramError::InvalidArgument)
+    } else {
+        Err(ProgramError::Custom(a as _))
+    }
+}
+
+// #[inline(never)]
+fn test_chained() -> ProgramResult {
+    let v = vec![1, 2, 3, 5];
+    let _res = v
+        .iter()
+        .enumerate()
+        .map(|e| e.1)
+        .map(|e| *e)
+        .filter(|e: &i32| *e > 4)
+        .count();
+    Ok(())
+}
+
+// #[inline(never)]
+fn test_chained2() -> ProgramResult {
+    let v = vec![1, 2, 3];
+    let _res = v
+        .iter()
+        .enumerate()
+        .map(|e| -> Option<i32> { Some(*e.1) })
+        .map(|e| -> Option<i32> { Some(e?) })
+        .filter(|e| e.unwrap() > 4)
+        .count();
+    Ok(())
+}
+
+// #[inline(never)]
+fn test_conditional(a: i32) {
+    if a == 1 {
+        msg!("Got 1");
+        msg!("Got 1");
+        msg!("Got 1");
+    } else {
+        msg!("Got 2");
+    }
+}
+
+// #[inline(never)]
+fn test_chained_errors() -> std::result::Result<Vec<u8>, String> {
+    let val = "1234";
+    let p = val
+        .parse::<i32>()
+        .map_err(|e| e.to_string())?
+        .try_to_vec()
+        .map_err(|_e| "stop!".to_string())?;
+    Ok(p)
 }
