@@ -51,6 +51,14 @@ create a symbolic link to it at the root directory of the anchor workspace. Be s
 ln -s /path/to/enhanced/litesvm/crates/node-litesvm/litesvm local-litesvm
 ```
 
+### 3. Fetch TypeScript dependencies
+
+At the root of this repository execute:
+
+```bash
+yarn
+```
+
 ## Generate test coverage report:
 
 Get coverage _without_ optimizations by setting `opt-level=0`, `debug=true` and `lto="off"` in `Cargo.toml`.
