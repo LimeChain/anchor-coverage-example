@@ -54,8 +54,6 @@ describe("vault", () => {
     const result = svm.sendTransaction(tx);
 
     assert.instanceOf(result, TransactionMetadata);
-    const result2: TransactionMetadata = result;
-    console.log(result2.prettyLogs());
 
     const vaultBalance = svm.getBalance(vaultPDA);
     const rentExemptBalance = svm.getRent().minimumBalance(BigInt(0));
@@ -96,8 +94,6 @@ describe("vault", () => {
     const result = svm.sendTransaction(tx);
 
     assert.instanceOf(result, TransactionMetadata);
-    const result2: TransactionMetadata = result;
-    console.log(result2.prettyLogs());
 
     const finalPayerBalance = BigInt(svm.getBalance(payer.publicKey));
     const finalVaultBalance = BigInt(svm.getBalance(vaultPDA));
@@ -143,9 +139,6 @@ describe("vault", () => {
     const result = svm.sendTransaction(tx);
 
     assert.instanceOf(result, TransactionMetadata);
-
-    const result2: TransactionMetadata = result;
-    console.log(result2.prettyLogs());
 
     const finalPayerBalance = BigInt(svm.getBalance(payer.publicKey));
     const finalVaultBalance = BigInt(svm.getBalance(vaultPDA));
