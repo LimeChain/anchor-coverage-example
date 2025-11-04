@@ -22,14 +22,14 @@ MacOS
 brew install llvm lcov
 ```
 
-Currently this example is tested to work on `Ubuntu 22.04.5` with Solana's platform-tools v1.51 [see discussion here](https://github.com/anza-xyz/agave/discussions/7709). Mind also that it's `LiteSVM 0.6.1` that's used under the hood.
+Currently this example is tested to work on `Ubuntu 22.04.5` / `MacOS` with Solana's platform-tools v1.51/v1.52 [see discussion here](https://github.com/anza-xyz/agave/discussions/7709). Mind also that it's a customized `LiteSVM 0.7.1` that's used under the hood so that the register and instruction tracing could be fetched.
 
 ## Setup Steps
 
 ### 1. Build a wrapper around anchor that supports code coverage for Anchor programs using the DWARF sections:
 
 ```bash
-git clone -b litesvm https://github.com/LimeChain/anchor-coverage-dwarf.git
+git clone -b litesvm_branching https://github.com/LimeChain/anchor-coverage-dwarf.git
 cd anchor-coverage-dwarf && cargo build
 ```
 
@@ -38,7 +38,7 @@ cd anchor-coverage-dwarf && cargo build
 Don't clone litesvm inside the anchor-coverage-example clone directory. Please clone it outside of it as this may break tests.
 
 ```bash
-git clone -b v0.6.1_dwarf_coverage https://github.com/LimeChain/litesvm
+git clone -b feat/tracing https://github.com/LimeChain/litesvm
 cd litesvm/crates/node-litesvm && yarn && yarn build
 ```
 
@@ -51,25 +51,16 @@ ln -s /path/to/enhanced/litesvm/crates/node-litesvm/litesvm local-litesvm
 
 ## Generate test coverage report:
 
-Get coverage _without_ optimizations by setting `opt-level=0` and `lto="off"` in `Cargo.toml`.
+Get coverage _without_ optimizations by setting `opt-level=0`, `debug=true` and `lto="off"` in `Cargo.toml`.
 This makes the program very big due to the lack of optimizations. The stack frame size of 4k isn't enough but Solana has made a fix.
 If SBPF version 1 is used dynamic stack frames are used. This allows for more accurate results.
-Due to several bugfixes it's desirable that platform-tools v1.51 is used:
+Due to several bugfixes it's desirable that platform-tools v1.51 or higher is used.
+Visualize coverage statistics:
 
-`RUST_BACKTRACE=1 SBPF_VERSION=v1 TOOLS_VERSION=v1.51 path/to/enhanced/anchor-coverage-dwarf/target/debug/anchor-coverage`
-
-Of course both of the environment variables can be omitted. Thus the SBPF version defaults to `v0` and platform-tools' version is the default one from CLI.
-With optimizations user may observe pretty inaccurate results.
-
-Then visualize:
-
-`genhtml --output-directory coverage sbf_trace_dir/*.lcov && open coverage/index.html`
+`ANCHOR_COVERAGE_PATH=path/to/anchor-coverage-dwarf/target/debug/anchor-coverage make coverage_stats`
 
 ## Known issues:
 
 The accuracy of the results must be improved:
-
-- `?` in Rust
 - chained operations
 - some executed lines are reported as uncovered or as to be hit erroneous number of times
-- branching
