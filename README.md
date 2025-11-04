@@ -28,6 +28,8 @@ Currently this example is tested to work on `Ubuntu 22.04.5` / `MacOS` with Sola
 
 ### 1. Build a wrapper around anchor that supports code coverage for Anchor programs using the DWARF sections:
 
+Be sure to clone it outside of the anchor-coverage-example repo.
+
 ```bash
 git clone -b litesvm_branching https://github.com/LimeChain/anchor-coverage-dwarf.git
 cd anchor-coverage-dwarf && cargo build
